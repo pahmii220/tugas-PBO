@@ -64,14 +64,15 @@ public class Database {
 //   }
 //     public void hapusuji(String Nik ){
 //     try{
-//         String sql = " delete from uji where nik = 1";
+//         String sql = " delete from uji where nik = ?";
 //         PreparedStatement perintah = ConnectionDB.prepareStatement(sql);
+//          perintah.setString(1, Nik);
 //         
 //         perintah.executeUpdate(); 
 //             System.out.println("data berhasil dihapus");
 //             }  
 //     catch (Exception e){
-//         System.out.println(e.getMessage());
+//         System.err.println(e.getMessage());
 //     }
 //   }
      // tabel keranjang
@@ -114,14 +115,15 @@ public class Database {
      
       public void hapuskeranjang(String id_keranjang ){
      try{
-         String sql = " delete from keranjang where id_keranjang = 1";
+         String sql = " delete from keranjang where id_keranjang = ?";
          PreparedStatement perintah = ConnectionDB.prepareStatement(sql);
+         perintah.setString(1, id_keranjang);
          
          perintah.executeUpdate(); 
              System.out.println("data berhasil dihapus");
              }  
      catch (Exception e){
-         System.out.println(e.getMessage());
+         System.err.println(e.getMessage());
      }
    }
             public void carikeranjang(String id_keranjang ){
@@ -162,7 +164,7 @@ public class Database {
       
       
       //Tabel Pesanan
-     public void simpanpesanan(String id_pemesanan, String tgl_pesan, String id_pelanggan, String alamat_pengiriman, String total_bayar){
+     public void simpanpesanan(String id_pemesanan, String tgl_pesan, String id_pelanggan, String alamat_pengiriman, int total_bayar){
      try{
          String sql = "insert into pemesanan ( id_pemesanan, tgl_pesan, id_pelanggan, alamat_pengiriman, total_bayar)value (?,?,?,?,?)";
          PreparedStatement perintah = ConnectionDB.prepareStatement(sql);
@@ -170,7 +172,7 @@ public class Database {
          perintah.setString(2, tgl_pesan);
          perintah.setString(3, id_pelanggan);
          perintah.setString(4, alamat_pengiriman);
-         perintah.setString(5, total_bayar);
+         perintah.setInt(5, total_bayar);
          
          perintah.executeUpdate(); 
              System.out.println("data berhasil disimpan");
@@ -180,14 +182,14 @@ public class Database {
          System.out.println(e.getMessage());
      }
    } 
-          public void ubahpesanan(String id_pemesanan, String tgl_pesan, String id_pelanggan, String alamat_pengiriman, String total_bayar){
+          public void ubahpesanan(String id_pemesanan, String tgl_pesan, String id_pelanggan, String alamat_pengiriman, int total_bayar){
      try{
          String sql = "Update pemesanan set tgl_pesan = ?, id_pelanggan =?, alamat_pengiriman =?, total_bayar=?  where id_pemesanan =?";
          PreparedStatement perintah = ConnectionDB.prepareStatement(sql);
          perintah.setString(1, tgl_pesan);
          perintah.setString(2, id_pelanggan);
          perintah.setString(3, alamat_pengiriman);
-         perintah.setString(4, total_bayar);
+         perintah.setInt(4, total_bayar);
          perintah.setString(5, id_pemesanan);
          
          perintah.executeUpdate(); 
@@ -200,14 +202,13 @@ public class Database {
    }  
           public void hapuspesanan(String id_pemesanan ){
      try{
-         String sql = " delete from pemesanan where id_pemesanan = 1";
+         String sql = "DELETE FROM pemesanan WHERE id_pemesanan =?";
          PreparedStatement perintah = ConnectionDB.prepareStatement(sql);
-         
+         perintah.setString(1, id_pemesanan);
          perintah.executeUpdate(); 
              System.out.println("data berhasil dihapus");
-             }  
-     catch (Exception e){
-         System.out.println(e.getMessage());
+             }  catch (Exception e){
+         System.err.println(e.getMessage());
      }
    }
           public void caripesanan(String id_pemesanan ){
@@ -289,8 +290,9 @@ public class Database {
    } 
             public void hapuspelanggan(String id_pelanggan ){
      try{
-         String sql = " delete from pelanggan where id_pelanggan = 1";
+         String sql = " delete from pelanggan where id_pelanggan = ?";
          PreparedStatement perintah = ConnectionDB.prepareStatement(sql);
+         perintah.setString(1, id_pelanggan);
          
          perintah.executeUpdate(); 
              System.out.println("data berhasil dihapus");
@@ -376,8 +378,9 @@ public class Database {
    } 
     public void hapusdetail_pemesanan(String id_det_pemesanan ){
      try{
-         String sql = " delete from detail_pemesanan where id_det_pemesanan = 1";
+         String sql = " delete from detail_pemesanan where id_det_pemesanan = ?";
          PreparedStatement perintah = ConnectionDB.prepareStatement(sql);
+         perintah.setString(1, id_det_pemesanan);
          
          perintah.executeUpdate(); 
              System.out.println("data berhasil dihapus");
